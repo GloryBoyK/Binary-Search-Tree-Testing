@@ -1,6 +1,4 @@
 public class BST implements BSTInterface{
-  //WRITE YOUR CODE HERE:
-  //NOTE: this class won't compile until you override all the methods in the interface
   private Node root;
   private int size=0;
   private class Node{
@@ -28,6 +26,7 @@ public class BST implements BSTInterface{
     this.root=add(this.root, value);
     size++;
   }
+  //adds a node to the list
   private Node add(Node node, int value){
     if(node==null){
       return new Node(value);
@@ -47,6 +46,7 @@ public class BST implements BSTInterface{
     public boolean has(int value){
       return find(this.root, value);
     }
+  // finds if the value is in the list
     public boolean find(Node node, int value){
       if(value==node.data){
         return true;
@@ -61,10 +61,11 @@ public class BST implements BSTInterface{
     public void remove(int value){
       return;
     }
+    //removes a node from the list
     
     @Override
     public String toString(){
-      return inOrder(this.root);
+      return postOrder(this.root);
     }
     
     public String inOrder(){
@@ -83,6 +84,75 @@ public class BST implements BSTInterface{
       
       return nodes;
     }
-    //
-  
+    //puts the list in least to greatest
+      public String inOrder(){
+      return inOrder(this.root);
+    }
+    
+    private String preOrder(Node node){
+      String nodes="";
+      if(node==null){
+        return nodes;
+      }
+      
+      nodes+=node.data;
+      nodes+=preOrder(node.left);
+      nodes+=preOrder(node.right);
+      
+      return nodes;
+    }
+    
+    public String postOrder(){
+      return postOrder(this.root);
+    }
+    
+    private String postOrder(Node node){
+      String nodes="";
+      if(node==null){
+        return nodes;
+      }
+      
+      nodes+=postOrder(node.left);
+      nodes+=postOrder(node.right);
+      nodes+=node.data;
+      
+      return nodes;
+    }
+    @Override
+    public void clear(){
+      this.root=deleteAll(this.root);
+    }
+    public Node deleteAll(Node node){
+      if(node==null){
+        return null;
+      }
+      
+      node.left=deleteAll(node.left);
+      node.right=deleteAll(node.right);
+      size--;
+      
+     return null; 
+    }
+    
+    @Override
+    public void remove(int num){
+      this.root=delete(this.root, num);
+      size--;
+    }
+    
+    private Node delete(Node node, num){
+      if(node==null){
+        throw IllegalArgumentException ("This value doesn't exist in the tree.");
+      }
+      
+      private Node getReplacement(Node deletedNode){
+        if(deletedNode.left==null && deletedNode.right==null){
+          return null;
+        }
+        else if(deletedNode.left==null){
+          
+        }
+      }
+      
+    }
 }
